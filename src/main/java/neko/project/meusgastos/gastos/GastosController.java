@@ -31,7 +31,7 @@ public class GastosController {
     @PostMapping
     public ResponseEntity createGastos(@RequestBody Gastos gastos) throws URISyntaxException {
         Gastos savedClient = gastosRepository.save(gastos);
-        return ResponseEntity.created(new URI("/clients/" + savedClient.getId())).body(savedClient);
+        return ResponseEntity.created(new URI("/gastos/" + savedClient.getId())).body(savedClient);
     }
 
     @PutMapping("/{id}")
@@ -46,7 +46,7 @@ public class GastosController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteClient(@PathVariable Long id) {
+    public ResponseEntity deleteGastos(@PathVariable Long id) {
         gastosRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
