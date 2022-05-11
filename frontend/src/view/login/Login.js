@@ -28,10 +28,15 @@ const Login = () => {
         })
 
         if (emailOk === false) {
-
+            toast.error("Esse e-mail não está cadastrado");
         }
-
-        navigate('/mainView');
+        if (emailOk === true && passwdOk === false) {
+            toast.error("A senha não está correta");
+        }
+        if (emailOk === true && passwdOk === true) {
+            toast.success("Login realizado com sucesso");
+            navigate('/mainView');
+        }
     }
 
     const goSignup = async () => {
