@@ -10,6 +10,8 @@ import {
 import MainView from './view/mainView/MainView';
 import Login from './view/login/Login';
 import NewGastos from './view/newGastos/NewGastos';
+import Signup from './view/signup/Signup';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   return (
@@ -20,6 +22,7 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/mainView" element={<MainView />} />
           <Route exact path="/NewGastos" element={<NewGastos />} />
+          <Route exact path="/signup" element={<Signup />} />
         </Routes>
       </>
     </Router>

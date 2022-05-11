@@ -38,6 +38,7 @@ code {
 }
 
 .filledButton {
+  border-color: #707070 !important;
   background-color: #ffffff !important;
   color: #707070 !important;
   width: 100%;

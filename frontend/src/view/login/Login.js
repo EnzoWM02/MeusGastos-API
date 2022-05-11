@@ -13,6 +13,10 @@ const Login = () => {
         navigate('/mainView');
     }
 
+    const goSignup = async () => {
+        navigate('/signup');
+    }
+
         return (
             <div className="Login defaultBackground">
                 <div className="card">
@@ -34,11 +38,9 @@ const Login = () => {
                     <Button className="filledButton" variant="contained" onClick={validateLogin}>
                         Login
                     </Button>
-                    <a className="signupRedirect" href="/signup">
-                        <Button className="signupButton outlinedButton" variant="outlined" >
+                        <Button className="signupButton outlinedButton" variant="outlined" onClick={goSignup}>
                             Sign up
                         </Button>
-                    </a>
                 </div>
             </div>
         );
