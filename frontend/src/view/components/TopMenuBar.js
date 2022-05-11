@@ -25,6 +25,10 @@ const TopMenuBar = () => {
         setAnchorEl2(null);
     };
 
+    const logOutButton = () => {
+        navigate('/login')
+    }
+
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
@@ -53,9 +57,7 @@ const TopMenuBar = () => {
                                 'aria-labelledby': 'events-button',
                             }}
                         >
-                            <MenuItem onClick={handleClose2}>Meus Eventos</MenuItem>
-                            <MenuItem onClick={handleClose2}>Todos os Eventos</MenuItem>
-                            <MenuItem onClick={handleClose2}>Certificados</MenuItem>
+                            <MenuItem onClick={logOutButton}>Logout</MenuItem>
                         </Menu>
                     </Toolbar>
                 </AppBar>

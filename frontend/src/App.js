@@ -24,6 +24,18 @@ const App = () => {
           <Route exact path="/NewGastos" element={<NewGastos />} />
           <Route exact path="/signup" element={<Signup />} />
         </Routes>
+        <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            closeButton={false}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
       </>
     </Router>
   );

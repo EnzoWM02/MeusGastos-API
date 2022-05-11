@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './Signup.css';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Toast from '../utils/Toast';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
     const [fieldValues, setFieldValues] = useState({});
@@ -29,15 +30,15 @@ const Signup = () => {
                 let email = fieldValues.email;
                 let password = fieldValues.password;
                 await axios.post(process.env.REACT_APP_API_URL_USER, {email, password});
-                Toast.success('Usuário criado com sucesso!');
+                toast.success('Usuário criado com sucesso!');
                 navigate('/login');
             } catch (e) {
                 console.log('err', { e });
                 console.error(e);
                 if (e.response?.data.error.status === 409) {
-                    Toast.error(e.response?.data.message);
+                    toast.error(e.response?.data.message);
                 } else {
-                    Toast.error('Erro ao criar usuário!');
+                    toast.error('Erro ao criar usuário!');
                 }
             }
         } else {
