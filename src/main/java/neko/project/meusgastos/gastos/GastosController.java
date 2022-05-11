@@ -9,7 +9,7 @@ import java.util.List;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/gastos")
 public class GastosController {
 
     private GastosRepository gastosRepository;

@@ -28,7 +28,7 @@ const Signup = () => {
             try {
                 let email = fieldValues.email;
                 let password = fieldValues.password;
-                await axios.post('http://localhost:8080/api/user', {email, password});
+                await axios.post(process.env.REACT_APP_API_URL_USER, {email, password});
                 Toast.success('Usuário criado com sucesso!');
                 navigate('/login');
             } catch (e) {
@@ -125,10 +125,10 @@ const Signup = () => {
                             });
                         }}
                     />
-                    <Button className="filledButton" variant="contained" type="submit">
+                    <Button className="filledButton botaoSignup" variant="contained" type="submit">
                         Cadastrar
                     </Button>
-                        <Button className="outlinedButton" variant="outlined" onClick={backToLogin}>
+                        <Button className="outlinedButton botaoSignup" variant="outlined" onClick={backToLogin}>
                             Voltar para Login
                         </Button>
                 </div>

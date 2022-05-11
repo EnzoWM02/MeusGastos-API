@@ -20,7 +20,7 @@ const TableGastos = () => {
 
     async function fetchGastosAxios () {
         try {
-            const {data:response} = await axios.get('http://localhost:8080/api');
+            const {data:response} = await axios.get(process.env.REACT_APP_API_URL_GASTOS);
             setGastos(response);
             let total = 0;
             response.map(function(key, index) {
