@@ -14,39 +14,43 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const teste = async () => {
-        let email = fieldValues.email;
-        let password = fieldValues.password;
-        await axios.post(process.env.REACT_APP_API_URL_USER, {email, password});
-        const {data:response} = await axios.get(process.env.REACT_APP_API_URL_USER);
-        const finalPassword = await axios.post(process.env.REACT_APP_API_URL_USER_PASSWORD, {password});
-
-        console.log(fieldValues.password);
-        console.log(finalPassword);
-
-        response.map(function(key, index) {
-            if (response[index].email === fieldValues.email) {
-                console.log(response[index].password);
-                if (response[index].password === finalPassword.data) {
-                }
-            }
-        })
-
+    const teste2 = async () => {
+        let enzo = "enzo";
+        const token = await axios.post(process.env.REACT_APP_API_URL_USER_COOKIES, {token: "enzo"});
+        console.log(token);
     }
+
+    // Usado para testar a criptografia
+    // const teste = async () => {
+    //     let email = fieldValues.email;
+    //     let password = fieldValues.password;
+    //     await axios.post(process.env.REACT_APP_API_URL_USER, {email, password});
+    //     const {data:response} = await axios.get(process.env.REACT_APP_API_URL_USER);
+    //     const finalPassword = await axios.post(process.env.REACT_APP_API_URL_USER_PASSWORD, password, {headers: {"Content-Type": "text/plain"}});
+
+    //     console.log(fieldValues.password);
+    //     console.log(finalPassword.data);
+
+    //     response.map(function(key, index) {
+    //         if (response[index].email === fieldValues.email) {
+    //             console.log(response[index].password);
+    //             if (response[index].password === finalPassword.data) {
+    //             }
+    //         }
+    //     })
+
+    // }
 
     const validateLogin = async () => {
         let emailOk = false;
         let passwdOk = false;
         let password = fieldValues.password;
         const {data:response} = await axios.get(process.env.REACT_APP_API_URL_USER);
-        const finalPassword = await axios.post(process.env.REACT_APP_API_URL_USER_PASSWORD, {password});
+        const finalPassword = await axios.post(process.env.REACT_APP_API_URL_USER_PASSWORD, password, {headers: {"Content-Type": "text/plain"}});
 
-        console.log(fieldValues.password);
-        console.log(finalPassword.data);
         response.map(function(key, index) {
             if (response[index].email === fieldValues.email) {
                 emailOk = true;
-                console.log(response[index].password);
                 if (response[index].password === finalPassword.data) {
                     passwdOk = true;
                 }
@@ -60,6 +64,7 @@ const Login = () => {
             toast.error("A senha não está correta");
         }
         if (emailOk === true && passwdOk === true) {
+            await axios.post(process.env.REACT_APP_API_URL_USER_COOKIES, password, {headers: {"Content-Type": "text/plain"}})
             toast.success("Login realizado com sucesso");
             navigate('/mainView');
         }
@@ -99,9 +104,9 @@ const Login = () => {
                         <Button className="signupButton outlinedButton" variant="outlined" onClick={goSignup}>
                             Sign up
                         </Button>
-                    <Button className="signupButton outlinedButton" variant="outlined" onClick={teste}>
-                        Teste
-                    </Button>
+                        <Button className="signupButton outlinedButton" variant="outlined" onClick={teste2}>
+                            Teste
+                        </Button>
                 </div>
             </div>
         );

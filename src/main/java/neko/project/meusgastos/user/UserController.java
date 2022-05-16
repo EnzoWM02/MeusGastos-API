@@ -1,6 +1,9 @@
 package neko.project.meusgastos.user;
 
 import neko.project.meusgastos.util.encryptPassword;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +12,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import org.json.*;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
@@ -67,5 +74,26 @@ public class UserController {
         }
 
         return encryptedPassword;
+    }
+
+    @PostMapping("/cookies")
+    public ResponseEntity setLoginCookies (@RequestBody String token) {
+
+        System.out.println("tokenori" + token);
+        JSONObject tokenAfterJSON = new JSONObject(token);
+        System.out.println("tokenposjson" + tokenAfterJSON.getString("token"));
+        
+        var cookie = ResponseCookie.from("user-id", tokenAfterJSON.getString("token"))
+        .path("/")
+        .build();
+        System.out.println("cookie:" + cookie.toString());
+        return ResponseEntity.ok()
+                .body(cookie.toString());
+
+        // Cookie cookie = new Cookie ("user-id", tokenAfterJSON.getString("token"));
+        // response.addCookie(cookie);
+
+        // return response;
+
     }
 }
