@@ -14,14 +14,40 @@ const Login = () => {
 
     const navigate = useNavigate();
 
+    const teste = async () => {
+        let email = fieldValues.email;
+        let password = fieldValues.password;
+        await axios.post(process.env.REACT_APP_API_URL_USER, {email, password});
+        const {data:response} = await axios.get(process.env.REACT_APP_API_URL_USER);
+        const finalPassword = await axios.post(process.env.REACT_APP_API_URL_USER_PASSWORD, {password});
+
+        console.log(fieldValues.password);
+        console.log(finalPassword);
+
+        response.map(function(key, index) {
+            if (response[index].email === fieldValues.email) {
+                console.log(response[index].password);
+                if (response[index].password === finalPassword.data) {
+                }
+            }
+        })
+
+    }
+
     const validateLogin = async () => {
         let emailOk = false;
         let passwdOk = false;
+        let password = fieldValues.password;
         const {data:response} = await axios.get(process.env.REACT_APP_API_URL_USER);
+        const finalPassword = await axios.post(process.env.REACT_APP_API_URL_USER_PASSWORD, {password});
+
+        console.log(fieldValues.password);
+        console.log(finalPassword.data);
         response.map(function(key, index) {
             if (response[index].email === fieldValues.email) {
                 emailOk = true;
-                if (response[index].password === fieldValues.password) {
+                console.log(response[index].password);
+                if (response[index].password === finalPassword.data) {
                     passwdOk = true;
                 }
              }
@@ -73,6 +99,9 @@ const Login = () => {
                         <Button className="signupButton outlinedButton" variant="outlined" onClick={goSignup}>
                             Sign up
                         </Button>
+                    <Button className="signupButton outlinedButton" variant="outlined" onClick={teste}>
+                        Teste
+                    </Button>
                 </div>
             </div>
         );

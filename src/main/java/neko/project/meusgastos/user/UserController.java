@@ -1,10 +1,13 @@
 package neko.project.meusgastos.user;
 
+import neko.project.meusgastos.util.encryptPassword;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @CrossOrigin(maxAge = 3600)
@@ -30,6 +33,8 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity createUser(@RequestBody Users user) throws URISyntaxException {
+        //Encrypt the password
+        user.setPassword(this.encryptedPassword(user.getPassword()));
         Users savedUser = userRepository.save(user);
         return ResponseEntity.created(new URI("/user/" + savedUser.getId())).body(savedUser);
     }
@@ -47,5 +52,20 @@ public class UserController {
     public ResponseEntity deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/password")
+    public String encryptedPassword(@RequestBody String password) {
+        encryptPassword crypt = new encryptPassword();
+        String encryptedPassword = null;
+        try {
+            encryptedPassword = (crypt.encrypt(password));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return encryptedPassword;
     }
 }
