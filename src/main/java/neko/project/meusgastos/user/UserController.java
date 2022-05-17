@@ -3,6 +3,7 @@ package neko.project.meusgastos.user;
 import neko.project.meusgastos.util.encryptPassword;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -95,5 +96,21 @@ public class UserController {
 
         // return response;
 
+    }
+
+    @GetMapping("/setCookies")
+    public ResponseEntity<?> setCookie(HttpServletResponse response) {
+        // create a cookie
+        Cookie cookie = new Cookie("username", "Jovan");    
+        cookie.setMaxAge(28800);
+        cookie.setSecure(false); //TODO: Change this to false or true depending on dev or prod
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+
+        response.addCookie(cookie);
+        response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.addHeader("Access-Control-Allow-Credentials", "true");
+
+        return new ResponseEntity<>("enzo", HttpStatus.OK);
     }
 }

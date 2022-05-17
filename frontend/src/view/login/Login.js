@@ -16,7 +16,7 @@ const Login = () => {
 
     const teste2 = async () => {
         let enzo = "enzo";
-        const token = await axios.post(process.env.REACT_APP_API_URL_USER_COOKIES, {token: "enzo"});
+        const token = await axios.get(process.env.REACT_APP_API_URL_USER_COOKIES);
         console.log(token);
     }
 
