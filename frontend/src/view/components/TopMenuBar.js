@@ -10,10 +10,12 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import './TopMenuBar.css';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const TopMenuBar = () => {
     const navigate = useNavigate();
 
+    const [cookies, setCookie] = useCookies(['user']);
     const [anchorEl, setAnchorEl] = useState(false);
     const [anchorEl2, setAnchorEl2] = useState(false);
     const open = !!anchorEl;
@@ -26,6 +28,7 @@ const TopMenuBar = () => {
     };
 
     const logOutButton = () => {
+        setCookie('token', 'logout', { path: '/', maxAge:'0'});
         navigate('/login')
     }
 

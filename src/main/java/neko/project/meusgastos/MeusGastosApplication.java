@@ -26,16 +26,16 @@ public class MeusGastosApplication {
         return "Hello World";
     }
 
-    // @Bean
-    // public CorsConfigurationSource corsConfigurationSource() {
-    //     final var source = new UrlBasedCorsConfigurationSource();
-    //     CorsConfiguration corsConfiguration = new CorsConfiguration();
-    //     //source.registerCorsConfiguration("/**", corsConfiguration.applyPermitDefaultValues());
-    //     corsConfiguration.setExposedHeaders(List.of("Authorization", "Set-Cookie"));
-    //     //corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
-    //     //corsConfiguration.setAllowCredentials(true);
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final var source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        source.registerCorsConfiguration("/**", corsConfiguration.applyPermitDefaultValues());
+        corsConfiguration.setExposedHeaders(List.of("Authorization", "Set-Cookie"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000", "same-origin"));
+        corsConfiguration.setAllowCredentials(true);
 
-    //     return source;
-    // }
+        return source;
+    }
 
 }

@@ -33,6 +33,7 @@
     border-radius: 1%;
     margin-top: 3%;
     background-color: #ffffff;
+    width: 40%;
 }
 
 .eventsMenuClass {
@@ -40,6 +41,7 @@
 }
 
 .TableGastos {
+    width: 100%;
     padding: 2%;
 }
 
@@ -48,4 +50,8 @@
     float: left;
     margin-bottom: 3%;
     justify-self: left !important;
+}
+
+.returnIcon {
+    float: right;
 }

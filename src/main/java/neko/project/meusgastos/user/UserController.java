@@ -76,41 +76,4 @@ public class UserController {
 
         return encryptedPassword;
     }
-
-    @PostMapping("/cookies")
-    public ResponseEntity setLoginCookies (@RequestBody String token) {
-
-        System.out.println("tokenori" + token);
-        JSONObject tokenAfterJSON = new JSONObject(token);
-        System.out.println("tokenposjson" + tokenAfterJSON.getString("token"));
-        
-        var cookie = ResponseCookie.from("user-id", tokenAfterJSON.getString("token"))
-        .path("/")
-        .build();
-        System.out.println("cookie:" + cookie.toString());
-        return ResponseEntity.ok()
-                .body(cookie.toString());
-
-        // Cookie cookie = new Cookie ("user-id", tokenAfterJSON.getString("token"));
-        // response.addCookie(cookie);
-
-        // return response;
-
-    }
-
-    @GetMapping("/setCookies")
-    public ResponseEntity<?> setCookie(HttpServletResponse response) {
-        // create a cookie
-        Cookie cookie = new Cookie("username", "Jovan");    
-        cookie.setMaxAge(28800);
-        cookie.setSecure(false); //TODO: Change this to false or true depending on dev or prod
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-
-        response.addCookie(cookie);
-        response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-        response.addHeader("Access-Control-Allow-Credentials", "true");
-
-        return new ResponseEntity<>("enzo", HttpStatus.OK);
-    }
 }

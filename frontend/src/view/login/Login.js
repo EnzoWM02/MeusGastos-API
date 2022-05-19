@@ -7,18 +7,32 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useCookies } from 'react-cookie';
+import Checkbox from '@mui/material/Checkbox';
 
 const Login = () => {
 
     const [fieldValues, setFieldValues] = useState([]);
-
+    const [cookies, setCookie] = useCookies(['user']);
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const navigate = useNavigate();
 
-    const teste2 = async () => {
-        let enzo = "enzo";
-        const token = await axios.get(process.env.REACT_APP_API_URL_USER_COOKIES);
-        console.log(token);
+    const [keepLoginCheck, setkeepLoginCheck] = useState(false);
+
+    const handleChange = event => {
+      setkeepLoginCheck(current => !current);
+    };
+
+    const verifyToken = () => {
+        if (cookies.token) {
+            navigate('/mainView');
+        }
     }
+
+    // const setTokenCookie = async () => {
+    //     setCookie('Name', fieldValues.email, { path: '/', maxAge:'3600'});
+    //     console.log(cookies.Name);
+    // }
 
     // Usado para testar a criptografia
     // const teste = async () => {
@@ -64,7 +78,10 @@ const Login = () => {
             toast.error("A senha não está correta");
         }
         if (emailOk === true && passwdOk === true) {
-            await axios.post(process.env.REACT_APP_API_URL_USER_COOKIES, password, {headers: {"Content-Type": "text/plain"}})
+            if (keepLoginCheck === true) {
+                setCookie('token', finalPassword.data, { path: '/', maxAge:'360000'});
+                console.log(cookies.token);
+            }
             toast.success("Login realizado com sucesso");
             navigate('/mainView');
         }
@@ -73,6 +90,10 @@ const Login = () => {
     const goSignup = async () => {
         navigate('/signup');
     }
+
+    useEffect(() => {
+        verifyToken();
+    }, []);
 
         return (
             <div className="Login defaultBackground">
@@ -98,14 +119,14 @@ const Login = () => {
                             setFieldValues({ ...fieldValues, password: e.currentTarget.value })
                         }
                     />
+                    <div className="checkboxKeepLogin">
+                    <Checkbox {...label}  id="keepLoggedIn" onChange={handleChange}/> Lembrar de mim
+                    </div>
                     <Button className="filledButton" variant="contained" onClick={validateLogin}>
                         Login
                     </Button>
                         <Button className="signupButton outlinedButton" variant="outlined" onClick={goSignup}>
                             Sign up
-                        </Button>
-                        <Button className="signupButton outlinedButton" variant="outlined" onClick={teste2}>
-                            Teste
                         </Button>
                 </div>
             </div>
