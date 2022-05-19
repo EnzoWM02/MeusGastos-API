@@ -42,7 +42,7 @@ const TableGastos = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell><b>Nome</b></TableCell>
-                            <TableCell align="right"><b>Descrição</b></TableCell>
+                            <TableCell align="left"><b>Descrição</b></TableCell>
                             <TableCell align="right"><b>Valor</b></TableCell>
                         </TableRow>
                     </TableHead>
@@ -53,11 +53,11 @@ const TableGastos = () => {
                                 key={gastos[index].name}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
-                                <TableCell component="th" scope="row">
+                                <TableCell component="th" scope="row" className="lineNome">
                                     {gastos[index].name}
                                 </TableCell>
-                                <TableCell align="right">{gastos[index].description}</TableCell>
-                                <TableCell align="right">{gastos[index].value}</TableCell>
+                                <TableCell align="right" className="line">{gastos[index].description}</TableCell>
+                                <TableCell align="right" className="lineNome">{gastos[index].value}</TableCell>
                             </TableRow>
                             );
                         })}
