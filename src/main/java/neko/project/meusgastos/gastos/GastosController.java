@@ -24,7 +24,7 @@ public class GastosController {
     }
 
     @GetMapping("/{id}")
-    public Gastos getGastos(@PathVariable Long id) {
+    public Gastos getGastos(@PathVariable long id) {
         return gastosRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 

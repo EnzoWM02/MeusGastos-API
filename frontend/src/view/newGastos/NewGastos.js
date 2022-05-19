@@ -6,10 +6,13 @@ import TextField from "@mui/material/TextField";
 import "./NewGastos.css"
 import { toastContainer, toast } from 'react-toastify';
 import {useNavigate} from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 const NewGastos = () => {
 
     const [fieldValues, setFieldValues] = useState({});
+
+    const [cookies, setCookie] = useCookies(['user']);
 
     const navigate = useNavigate();
 
@@ -23,7 +26,7 @@ const NewGastos = () => {
         let value = fieldValues.value;
         try {
                 const data = await axios.post(process.env.REACT_APP_API_URL_GASTOS, {name, description, value});
-                console.log(data);
+                setCookie('last', data.data.id, { path: '/', maxAge:'360000'});
                 navigate('/mainView');
             } catch (e) {
                 toast.error("Os campos não foram corretamente preenchidos");
