@@ -2,9 +2,6 @@ package neko.project.meusgastos.user;
 
 import neko.project.meusgastos.util.encryptPassword;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +10,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import org.json.*;
 
 @CrossOrigin(maxAge = 3600)
 @RestController

@@ -1,10 +1,8 @@
-import logo from './logo.svg';
 import './mainView.css';
 import React, {Component} from "react";
-import TextField from '@mui/material/TextField';
 import TopMenuBar from '../components/TopMenuBar';
 import TableGastos from '../components/TableGastos';
-import {Button, ButtonGroup, Container, Table} from 'reactstrap';
+import {Button} from 'reactstrap';
 import {useNavigate} from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';

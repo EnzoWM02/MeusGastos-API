@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import TopMenuBar from "../components/TopMenuBar";
 import {Button} from "reactstrap";
-import Input from '@mui/material/Input';
 import TextField from "@mui/material/TextField";
 import "./NewGastos.css"
 import { toastContainer, toast } from 'react-toastify';
