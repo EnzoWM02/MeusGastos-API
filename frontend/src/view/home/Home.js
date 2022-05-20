@@ -29,10 +29,10 @@ const Home = () => {
 
 
     const toGo = async () => {
-        navigate('/new');
+        navigate('/home/new');
     }
 
-        return (
+        return (    
             <div className="defaultBackground mainViewBackground">
                 <div className="PageHeader">
                     <TopMenuBar/>
@@ -41,6 +41,7 @@ const Home = () => {
                     <Route path="/" element={<Navigate to="/home/gastos" />} />
                     <Route path="/gastos" element={<TableGastos />} />
                     <Route path="/new" element={<NewGastos />} />
+                    <Route path="/new/:id" element={<NewGastos />} />
                 </Routes>
 
             </div>

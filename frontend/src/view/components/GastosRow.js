@@ -12,12 +12,19 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './TableGastos.css';
 import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const GastosRow = ({gasto}) => {
+
+    const navigate = useNavigate();
 
         const deleteRow = async () => {
             let url = process.env.REACT_APP_API_URL_GASTOS + '/' + gasto.id;
             await axios.delete(url); 
+        }
+
+        const editRow = async () => {
+            navigate(`/home/new/${gasto.id}`);
         }
 
         return (
@@ -38,7 +45,7 @@ const GastosRow = ({gasto}) => {
                         sx={{ mr: 2 }}
                         id="events-button"
                         className="lineIcons"
-                    //onClick={deleteLast}
+                        onClick={editRow}
                     >
                         <EditIcon />
                     </IconButton>

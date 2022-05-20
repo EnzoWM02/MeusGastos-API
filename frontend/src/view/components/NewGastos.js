@@ -5,11 +5,12 @@ import {Button} from "reactstrap";
 import TextField from "@mui/material/TextField";
 import "./NewGastos.css"
 import { toastContainer, toast } from 'react-toastify';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { useCookies } from 'react-cookie';
 
 const NewGastos = () => {
 
+    const { id } = useParams();
     const [fieldValues, setFieldValues] = useState({});
 
     const [cookies, setCookie] = useCookies(['user']);
@@ -25,8 +26,14 @@ const NewGastos = () => {
         let description = fieldValues.description;
         let value = fieldValues.value;
         try {
-                const data = await axios.post(process.env.REACT_APP_API_URL_GASTOS, {name, description, value});
-                setCookie('last', data.data.id, { path: '/', maxAge:'360000'});
+                if (!id) {
+                    const data = await axios.post(process.env.REACT_APP_API_URL_GASTOS, {name, description, value});
+                    setCookie('last', data.data.id, { path: '/', maxAge:'360000'});
+                } else {
+                    let url = process.env.REACT_APP_API_URL_GASTOS + '/' + id;
+                    console.log(id);
+                    await axios.put(url, {name, description, value});
+                }                
                 navigate('/home');
             } catch (e) {
                 toast.error("Os campos não foram corretamente preenchidos");
@@ -37,6 +44,7 @@ const NewGastos = () => {
     return (
         
             <div className="card ngcard">
+                {console.log(id)}
                 <h2>Cadastrar novo gasto</h2>
                 <TextField
                     className="textField"
