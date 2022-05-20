@@ -24,7 +24,7 @@ public class GastosController {
     }
 
     @GetMapping("/{id}")
-    public Gastos getGastos(@PathVariable long id) {
+    public Gastos getGastos(@PathVariable int id) {
         return gastosRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
@@ -35,7 +35,7 @@ public class GastosController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateGastos(@PathVariable Long id, @RequestBody Gastos gastos) {
+    public ResponseEntity updateGastos(@PathVariable int id, @RequestBody Gastos gastos) {
         Gastos currentGasto = gastosRepository.findById(id).orElseThrow(RuntimeException::new);
         currentGasto.setName(gastos.getName());
         currentGasto.setDescription(gastos.getDescription());
@@ -46,7 +46,7 @@ public class GastosController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteGastos(@PathVariable Long id) {
+    public ResponseEntity deleteGastos(@PathVariable int id) {
         gastosRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }

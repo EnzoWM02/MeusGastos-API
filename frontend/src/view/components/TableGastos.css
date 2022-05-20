@@ -1,5 +1,5 @@
 .line {
-    display: table-caption !important;
+    text-align: start !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
