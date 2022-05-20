@@ -1,25 +1,39 @@
 import './App.css';
-import React from 'react';
+import { React, useState} from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from 'react-router-dom';
-import MainView from './view/mainView/MainView';
+import Home from './view/home/Home';
 import Login from './view/login/Login';
 import NewGastos from './view/newGastos/NewGastos';
 import Signup from './view/signup/Signup';
 import { ToastContainer } from 'react-toastify';
+import {useCookies} from "react-cookie";
 
 const App = () => {
+
+  const [cookies, setCookie] = useCookies(['user']);
+
+  const isLoggedIn = () => {
+    const token = cookies.token;
+    let loggedIn;
+    token ? (loggedIn = true) : (loggedIn = false);
+
+    return loggedIn;
+  };
+
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
+
   return (
     <Router>
       <>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/mainView" element={<MainView />} />
+          <Route exact path="/login" element={<Login setLoggedIn={setLoggedIn}/>} />
+          <Route exact path="/home" element={loggedIn ? <Home /> : <Navigate to="/login" /> } />
           <Route exact path="/NewGastos" element={<NewGastos />} />
           <Route exact path="/signup" element={<Signup />} />
         </Routes>

@@ -12,3 +12,8 @@
     text-overflow: ellipsis !important;
     max-width: 150px !important;
 }
+
+.lineIcons {
+    align-items: flex-end !important;
+    padding: 0px !important;
+}

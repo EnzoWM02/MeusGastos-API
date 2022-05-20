@@ -17,7 +17,7 @@ const NewGastos = () => {
     const navigate = useNavigate();
 
     const backToMain = async () => {
-        navigate('/MainView')
+        navigate('/home')
     }
 
     const newGasto = async () => {
@@ -27,7 +27,7 @@ const NewGastos = () => {
         try {
                 const data = await axios.post(process.env.REACT_APP_API_URL_GASTOS, {name, description, value});
                 setCookie('last', data.data.id, { path: '/', maxAge:'360000'});
-                navigate('/mainView');
+                navigate('/home');
             } catch (e) {
                 toast.error("Os campos não foram corretamente preenchidos");
                 console.log (e);

@@ -1,4 +1,4 @@
-import './mainView.css';
+import './Home.css';
 import React, {Component} from "react";
 import TopMenuBar from '../components/TopMenuBar';
 import TableGastos from '../components/TableGastos';
@@ -11,7 +11,7 @@ import Tooltip from '@mui/material/Tooltip';
 import {useCookies} from "react-cookie";
 import { toast } from 'react-toastify';
 
-const MainView = () => {
+const Home = () => {
 
     const navigate = useNavigate();
     const [cookies, setCookie] = useCookies(['user']);
@@ -20,8 +20,7 @@ const MainView = () => {
         try {
         console.log(cookies.last);
         let url = process.env.REACT_APP_API_URL_GASTOS + '/' + cookies.last;
-        const {data} = await axios.delete(url);
-        reload();
+        await axios.delete(url);
         } catch (e) {
             toast.error("O último gasto já foi removido");
         }
@@ -32,10 +31,6 @@ const MainView = () => {
         navigate('/NewGastos');
     }
 
-    const reload = () => {
-        window.location.reload(false);
-    }
-
         return (
             <div className="defaultBackground mainViewBackground">
                 <div className="PageHeader">
@@ -43,22 +38,6 @@ const MainView = () => {
                 </div>
                 <div className="outside">
                     <div className="TableGastos">
-                        <Button className="createButton filledButton" variant="contained" onClick={toGo}>
-                            Cadastrar novo gasto
-                        </Button>
-                        <Tooltip title="Desfazer último">
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            aria-label="events-menu"
-                            sx={{ mr: 2 }}
-                            id="events-button"
-                            className="returnIcon"
-                            onClick={deleteLast}
-                        >
-                            <KeyboardReturnIcon />
-                        </IconButton>
-                        </Tooltip>
                         <TableGastos/>
                     </div>
                 </div>
@@ -66,4 +45,4 @@ const MainView = () => {
         );
 }
 
-export default MainView;
+export default Home;

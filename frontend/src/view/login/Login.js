@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useCookies } from 'react-cookie';
 import Checkbox from '@mui/material/Checkbox';
 
-const Login = () => {
+const Login = ({setLoggedIn}) => {
 
     const [fieldValues, setFieldValues] = useState([]);
     const [cookies, setCookie] = useCookies(['user']);
@@ -21,12 +21,6 @@ const Login = () => {
     const handleChange = event => {
       setkeepLoginCheck(current => !current);
     };
-
-    const verifyToken = () => {
-        if (cookies.token) {
-            navigate('/mainView');
-        }
-    }
 
     // const setTokenCookie = async () => {
     //     setCookie('Name', fieldValues.email, { path: '/', maxAge:'3600'});
@@ -79,20 +73,18 @@ const Login = () => {
         if (emailOk === true && passwdOk === true) {
             if (keepLoginCheck === true) {
                 setCookie('token', finalPassword.data, { path: '/', maxAge:'360000'});
-                console.log(cookies.token);
+            } else {
+                setCookie('token', finalPassword.data, { path: '/'});
             }
             toast.success("Login realizado com sucesso");
-            navigate('/mainView');
+            setLoggedIn(true);
+            navigate('/home');
         }
     }
 
     const goSignup = async () => {
         navigate('/signup');
     }
-
-    useEffect(() => {
-        verifyToken();
-    }, []);
 
         return (
             <div className="Login defaultBackground">
