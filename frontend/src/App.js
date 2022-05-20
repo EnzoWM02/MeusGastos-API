@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 import Home from './view/home/Home';
 import Login from './view/login/Login';
-import NewGastos from './view/newGastos/NewGastos';
 import Signup from './view/signup/Signup';
 import { ToastContainer } from 'react-toastify';
 import {useCookies} from "react-cookie";
@@ -31,10 +30,9 @@ const App = () => {
     <Router>
       <>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/" element={loggedIn ? <Home /> : <Navigate to="/login" />} />
           <Route exact path="/login" element={<Login setLoggedIn={setLoggedIn}/>} />
-          <Route exact path="/home" element={loggedIn ? <Home /> : <Navigate to="/login" /> } />
-          <Route exact path="/NewGastos" element={<NewGastos />} />
+          <Route exact path="/home/*" element={loggedIn ? <Home /> : <Navigate to="/login" /> } />
           <Route exact path="/signup" element={<Signup />} />
         </Routes>
         <ToastContainer

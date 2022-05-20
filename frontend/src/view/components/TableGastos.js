@@ -12,10 +12,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GastosRow from '../components/GastosRow';
 import Tooltip from '@mui/material/Tooltip';
-import {useCookies} from "react-cookie";
+import { useCookies } from "react-cookie";
 import { toast } from 'react-toastify';
-import {useNavigate} from "react-router-dom";
-import {Button} from 'reactstrap';
+import { useNavigate } from "react-router-dom";
+import { Button } from 'reactstrap';
 import './TableGastos.css';
 import axios from 'axios';
 
@@ -30,9 +30,9 @@ const TableGastos = () => {
 
     const deleteLast = async () => {
         try {
-        console.log(cookies.last);
-        let url = process.env.REACT_APP_API_URL_GASTOS + '/' + cookies.last;
-        await axios.delete(url);
+            console.log(cookies.last);
+            let url = process.env.REACT_APP_API_URL_GASTOS + '/' + cookies.last;
+            await axios.delete(url);
         } catch (e) {
             toast.error("O último gasto já foi removido");
         }
@@ -40,7 +40,7 @@ const TableGastos = () => {
 
 
     const toGo = async () => {
-        navigate('/NewGastos');
+        navigate('/home/new');
     }
 
     async function fetchGastosAxios() {
@@ -62,11 +62,13 @@ const TableGastos = () => {
     }, [gastos]);
 
     return (
-                    <>
+        <>
+            <div className="outside">
+                <div className="TableGastos">
                     <Button className="createButton filledButton" variant="contained" onClick={toGo}>
-                            Cadastrar novo gasto
-                        </Button>
-                        <Tooltip title="Desfazer último">
+                        Cadastrar novo gasto
+                    </Button>
+                    <Tooltip title="Desfazer último">
                         <IconButton
                             size="large"
                             edge="start"
@@ -78,38 +80,40 @@ const TableGastos = () => {
                         >
                             <KeyboardReturnIcon />
                         </IconButton>
-                        </Tooltip> 
-                        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell><b>Nome</b></TableCell>
-                        <TableCell align="left"><b>Descrição</b></TableCell>
-                        <TableCell align="right"><b>Valor</b></TableCell>
-                        <TableCell align="right"></TableCell>
-                        <TableCell align="right"></TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {gastos.map(function (key, index) {
-                        return <GastosRow key={index} gasto={gastos[index]}/>;
-                    })}
-                    <TableRow
-                        key={total}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                        <TableCell component="th" scope="row">
+                    </Tooltip>
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell><b>Nome</b></TableCell>
+                                    <TableCell align="left"><b>Descrição</b></TableCell>
+                                    <TableCell align="right"><b>Valor</b></TableCell>
+                                    <TableCell align="right"></TableCell>
+                                    <TableCell align="right"></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {gastos.map(function (key, index) {
+                                    return <GastosRow key={index} gasto={gastos[index]} />;
+                                })}
+                                <TableRow
+                                    key={total}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell component="th" scope="row">
 
-                        </TableCell>
-                        <TableCell align="left"><b>Total</b></TableCell>
-                        <TableCell align="right">{total}</TableCell>
-                    </TableRow>
-                </TableBody>
-            </Table>
-        </TableContainer>                   
-                    </>
-                    
-        
+                                    </TableCell>
+                                    <TableCell align="left"><b>Total</b></TableCell>
+                                    <TableCell align="right">{total}</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>
+            </div>
+        </>
+
+
     );
 };
 

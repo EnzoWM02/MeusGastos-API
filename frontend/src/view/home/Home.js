@@ -2,8 +2,9 @@ import './Home.css';
 import React, {Component} from "react";
 import TopMenuBar from '../components/TopMenuBar';
 import TableGastos from '../components/TableGastos';
+import NewGastos from '../components/NewGastos';
 import {Button} from 'reactstrap';
-import {useNavigate} from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import axios from 'axios';
@@ -28,7 +29,7 @@ const Home = () => {
 
 
     const toGo = async () => {
-        navigate('/NewGastos');
+        navigate('/new');
     }
 
         return (
@@ -36,11 +37,12 @@ const Home = () => {
                 <div className="PageHeader">
                     <TopMenuBar/>
                 </div>
-                <div className="outside">
-                    <div className="TableGastos">
-                        <TableGastos/>
-                    </div>
-                </div>
+                <Routes>
+                    <Route path="/" element={<Navigate to="/home/gastos" />} />
+                    <Route path="/gastos" element={<TableGastos />} />
+                    <Route path="/new" element={<NewGastos />} />
+                </Routes>
+
             </div>
         );
 }

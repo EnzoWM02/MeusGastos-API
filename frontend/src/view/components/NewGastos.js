@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import TopMenuBar from "../components/TopMenuBar";
+import TopMenuBar from "./TopMenuBar";
 import {Button} from "reactstrap";
 import TextField from "@mui/material/TextField";
 import "./NewGastos.css"
@@ -35,10 +35,7 @@ const NewGastos = () => {
     }
 
     return (
-        <div className="defaultBackground mainViewBackground">
-            <div className="PageHeader">
-                <TopMenuBar/>
-            </div>
+        
             <div className="card ngcard">
                 <h2>Cadastrar novo gasto</h2>
                 <TextField
@@ -78,7 +75,6 @@ const NewGastos = () => {
                         Voltar
                     </Button>
             </div>
-        </div>
     );
 
 }
