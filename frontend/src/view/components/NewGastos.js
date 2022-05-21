@@ -41,14 +41,16 @@ const NewGastos = () => {
         let name = fieldValues.name;
         let description = fieldValues.description;
         let value = fieldValues.value;
+        let userid = cookies.userid;
+        console.log(cookies.userid);
         try {
                 if (!id) {
-                    const data = await axios.post(process.env.REACT_APP_API_URL_GASTOS, {name, description, value});
+                    const data = await axios.post(process.env.REACT_APP_API_URL_GASTOS, {name, description, value, userid});
                     setCookie('last', data.data.id, { path: '/', maxAge:'360000'});
                 } else {
                     let url = process.env.REACT_APP_API_URL_GASTOS + '/' + id;
-                    console.log(id);
-                    await axios.put(url, {name, description, value});
+                    
+                    await axios.put(url, {name, description, value, userid});
                 }                
                 navigate('/home');
             } catch (e) {

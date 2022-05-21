@@ -3,12 +3,19 @@ package neko.project.meusgastos.user;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import neko.project.meusgastos.gastos.Gastos;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Users {
@@ -19,9 +26,12 @@ public class Users {
     private String email;
     private String password;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")    
+    private List<Gastos> gastos;
+
     @CreationTimestamp
-    @Column(updatable = false)
-    
+    @Column(updatable = false)    
     private LocalDateTime createdAt;
 
     @UpdateTimestamp

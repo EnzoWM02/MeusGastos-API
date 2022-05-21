@@ -52,6 +52,7 @@ const Login = ({setLoggedIn}) => {
         let emailOk = false;
         let passwdOk = false;
         let password = fieldValues.password;
+        let userid = '';
         const {data:response} = await axios.get(process.env.REACT_APP_API_URL_USER);
         const finalPassword = await axios.post(process.env.REACT_APP_API_URL_USER_PASSWORD, password, {headers: {"Content-Type": "text/plain"}});
 
@@ -60,6 +61,7 @@ const Login = ({setLoggedIn}) => {
                 emailOk = true;
                 if (response[index].password === finalPassword.data) {
                     passwdOk = true;
+                    userid = response[index].id;
                 }
              }
         })
@@ -73,8 +75,10 @@ const Login = ({setLoggedIn}) => {
         if (emailOk === true && passwdOk === true) {
             if (keepLoginCheck === true) {
                 setCookie('token', finalPassword.data, { path: '/', maxAge:'360000'});
+                setCookie('userid', userid, { path: '/', maxAge:'360000'});
             } else {
                 setCookie('token', finalPassword.data, { path: '/'});
+                setCookie('userid', userid, { path: '/'});
             }
             toast.success("Login realizado com sucesso");
             setLoggedIn(true);

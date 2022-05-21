@@ -28,15 +28,16 @@ public class Gastos {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
     
+    private int user_id;
 
     public Gastos() {
     }
 
-    public Gastos(String name, String description, Double value) {
+    public Gastos(String name, String description, Double value, int user_id) {
         this.name = name;
         this.description = description;
         this.value = value;
-
+        this.user_id = user_id;
     }
 
     public int getId() {
@@ -87,5 +88,14 @@ public class Gastos {
         this.updatedAt = updatedAt;
     }
 
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    
     
 }

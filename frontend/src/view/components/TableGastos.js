@@ -28,6 +28,11 @@ const TableGastos = () => {
     const navigate = useNavigate();
     const [cookies, setCookie] = useCookies(['user']);
 
+    const teste = async () => {
+        const {data} = await axios.get(`${process.env.REACT_APP_API_URL_GASTOS}/${cookies.userid}`);
+        console.log (data);
+    }
+
     const deleteLast = async () => {
         try {
             console.log(cookies.last);
@@ -67,6 +72,9 @@ const TableGastos = () => {
                 <div className="TableGastos">
                     <Button className="createButton filledButton" variant="contained" onClick={toGo}>
                         Cadastrar novo gasto
+                    </Button>
+                    <Button className="createButton filledButton" variant="contained" onClick={teste}>
+                        Teste
                     </Button>
                     <Tooltip title="Desfazer último">
                         <IconButton
