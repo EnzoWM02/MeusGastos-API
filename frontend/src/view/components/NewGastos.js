@@ -12,7 +12,6 @@ const NewGastos = () => {
 
     const { id } = useParams();
     const [fieldValues, setFieldValues] = useState({});
-    const [gasto, setGasto] = useState();
 
     const [cookies, setCookie] = useCookies(['user']);
 
@@ -22,7 +21,6 @@ const NewGastos = () => {
         try {
             if (id) {
                 const { data } = await axios.get(`${process.env.REACT_APP_API_URL_GASTOS}/${id}`);
-                setGasto(data);
                 setFieldValues({
                     ...fieldValues,
                     name: data.name,

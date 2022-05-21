@@ -2,7 +2,9 @@ package neko.project.meusgastos.gastos;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,23 +15,28 @@ import java.time.LocalDateTime;
 public class Gastos {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
     private Double value;
+
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+    
 
     public Gastos() {
     }
 
-    public Gastos(int id, String name, String description, Double value, LocalDateTime createdAt) {
-        this.id = id;
+    public Gastos(String name, String description, Double value) {
         this.name = name;
         this.description = description;
         this.value = value;
-        this.createdAt = createdAt;
+
     }
 
     public int getId() {
@@ -71,4 +78,14 @@ public class Gastos {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    
 }
