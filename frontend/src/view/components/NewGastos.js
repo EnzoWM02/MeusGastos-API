@@ -12,10 +12,22 @@ const NewGastos = () => {
 
     const { id } = useParams();
     const [fieldValues, setFieldValues] = useState({});
+    const [gasto, setGasto] = useState();
 
     const [cookies, setCookie] = useCookies(['user']);
 
     const navigate = useNavigate();
+
+    const fetchGasto = async () => {
+        try {
+            if (id) {
+                setGasto(await axios.get(`${process.env.REACT_APP_API_URL_GASTOS}/${id}`));
+                
+            }
+        } catch (e) {
+            console.log (e);
+        }
+    }
 
     const backToMain = async () => {
         navigate('/home')
@@ -41,14 +53,18 @@ const NewGastos = () => {
             }
     }
 
+    useEffect(() => {
+        fetchGasto();
+    },[]); 
+
     return (
         
             <div className="card ngcard">
-                {console.log(id)}
                 <h2>Cadastrar novo gasto</h2>
                 <TextField
                     className="textField"
                     id="name"
+                    value={gasto ? gasto.data.name : ''}
                     label="Nome"
                     variant="outlined"
                     type="text"
@@ -59,6 +75,7 @@ const NewGastos = () => {
                 <TextField
                     className="textField"
                     id="description"
+                    value={gasto ? gasto.data.description : ''}
                     label="Descrição"
                     variant="outlined"
                     type="text"
@@ -69,6 +86,7 @@ const NewGastos = () => {
                 <TextField
                     className="textField"
                     id="value"
+                    value={gasto ? gasto.data.value : ''}
                     label="Valor"
                     variant="outlined"
                     Input type="number"
