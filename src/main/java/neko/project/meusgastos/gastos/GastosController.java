@@ -40,7 +40,7 @@ public class GastosController {
         currentGasto.setName(gastos.getName());
         currentGasto.setDescription(gastos.getDescription());
         currentGasto.setValue(gastos.getValue());
-        currentGasto = gastosRepository.save(gastos);
+        currentGasto = gastosRepository.save(currentGasto);
 
         return ResponseEntity.ok(currentGasto);
     }
