@@ -21,8 +21,14 @@ const NewGastos = () => {
     const fetchGasto = async () => {
         try {
             if (id) {
-                setGasto(await axios.get(`${process.env.REACT_APP_API_URL_GASTOS}/${id}`));
-                
+                const { data } = await axios.get(`${process.env.REACT_APP_API_URL_GASTOS}/${id}`);
+                setGasto(data);
+                setFieldValues({
+                    ...fieldValues,
+                    name: data.name,
+                    description: data.description,
+                    value: data.value
+                  });
             }
         } catch (e) {
             console.log (e);
@@ -61,11 +67,13 @@ const NewGastos = () => {
         
             <div className="card ngcard">
                 <h2>Cadastrar novo gasto</h2>
+                {console.log(fieldValues.name)}
                 <TextField
                     className="textField"
                     id="name"
-                    value={gasto ? gasto.data.name : ''}
+                    value={fieldValues.name}
                     label="Nome"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     onChange={(e) => {
@@ -75,7 +83,8 @@ const NewGastos = () => {
                 <TextField
                     className="textField"
                     id="description"
-                    value={gasto ? gasto.data.description : ''}
+                    value={fieldValues.description}
+                    InputLabelProps={{ shrink: true }}
                     label="Descrição"
                     variant="outlined"
                     type="text"
@@ -86,7 +95,8 @@ const NewGastos = () => {
                 <TextField
                     className="textField"
                     id="value"
-                    value={gasto ? gasto.data.value : ''}
+                    value={fieldValues.value}
+                    InputLabelProps={{ shrink: true }}
                     label="Valor"
                     variant="outlined"
                     Input type="number"
