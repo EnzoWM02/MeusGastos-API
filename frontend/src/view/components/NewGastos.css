@@ -5,3 +5,7 @@
 .textField, .signupRedirect {
     width: 100%;
 }
+
+.dateField {
+    width: 100% !important;
+}

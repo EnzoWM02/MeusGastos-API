@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import TopMenuBar from "./TopMenuBar";
-import {Button} from "reactstrap";
+import { Button } from "reactstrap";
 import TextField from "@mui/material/TextField";
 import "./NewGastos.css"
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { toastContainer, toast } from 'react-toastify';
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import Stack from '@mui/material/Stack';
 
 const NewGastos = () => {
 
@@ -17,6 +21,12 @@ const NewGastos = () => {
 
     const navigate = useNavigate();
 
+    const [value, setValue] = useState(new Date('2014-08-18T21:11:54'));
+
+    const handleChange = (e) => {
+        setValue(e);
+    };
+
     const fetchGasto = async () => {
         try {
             if (id) {
@@ -26,10 +36,10 @@ const NewGastos = () => {
                     name: data.name,
                     description: data.description,
                     value: data.value
-                  });
+                });
             }
         } catch (e) {
-            console.log (e);
+            console.log(e);
         }
     }
 
@@ -44,27 +54,27 @@ const NewGastos = () => {
         let user_id = cookies.userid;
         console.log(cookies.userid);
         try {
-                if (!id) {
-                    const data = await axios.post(process.env.REACT_APP_API_URL_GASTOS, {name, description, value, user_id});
-                    setCookie('last', data.data.id, { path: '/', maxAge:'360000'});
-                } else {
-                    let url = process.env.REACT_APP_API_URL_GASTOS + '/' + id;
-                    
-                    await axios.put(url, {name, description, value, user_id});
-                }                
-                navigate('/home');
-            } catch (e) {
-                toast.error("Os campos não foram corretamente preenchidos");
-                console.log (e);
+            if (!id) {
+                const data = await axios.post(process.env.REACT_APP_API_URL_GASTOS, { name, description, value, user_id });
+                setCookie('last', data.data.id, { path: '/', maxAge: '360000' });
+            } else {
+                let url = process.env.REACT_APP_API_URL_GASTOS + '/' + id;
+
+                await axios.put(url, { name, description, value, user_id });
             }
+            navigate('/home');
+        } catch (e) {
+            toast.error("Os campos não foram corretamente preenchidos");
+            console.log(e);
+        }
     }
 
     useEffect(() => {
         fetchGasto();
-    },[]); 
+    }, []);
 
     return (
-        
+        <>
             <div className="card ngcard">
                 <h2>Cadastrar novo gasto</h2>
                 {console.log(fieldValues.name)}
@@ -104,13 +114,28 @@ const NewGastos = () => {
                         setFieldValues({ ...fieldValues, value: e.target.value });
                     }}
                 />
+                <div className="dateField">
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <Stack spacing={3}>
+                        <DesktopDatePicker
+                            
+                            label="Data"
+                            inputFormat="dd/MM/yyyy"
+                            value={value}
+                            onChange={(e) => handleChange(e)}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </Stack>
+                </LocalizationProvider>
+                </div>
                 <Button className="filledButton" variant="contained" onClick={newGasto}>
                     Cadastrar
                 </Button>
-                    <Button className="signupButton outlinedButton" variant="outlined" onClick={backToMain}>
-                        Voltar
-                    </Button>
+                <Button className="signupButton outlinedButton" variant="outlined" onClick={backToMain}>
+                    Voltar
+                </Button>
             </div>
+        </>
     );
 
 }
