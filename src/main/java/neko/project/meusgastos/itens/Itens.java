@@ -1,4 +1,4 @@
-package neko.project.meusgastos.gastos;
+package neko.project.meusgastos.itens;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenerationTime;
@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
-public class Gastos {
+public class Itens {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,10 +30,10 @@ public class Gastos {
     
     private int user_id;
 
-    public Gastos() {
+    public Itens() {
     }
 
-    public Gastos(String name, String description, Double value, int user_id) {
+    public Itens(String name, String description, Double value, int user_id) {
         this.name = name;
         this.description = description;
         this.value = value;

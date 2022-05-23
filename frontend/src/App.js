@@ -51,35 +51,4 @@ const App = () => {
     </Router>
   );
 };
-
-/*class App extends Component {
-  state = {
-    gastos: []
-  };
-
-  async componentDidMount() {
-    const response = await fetch('/api');
-    const body = await response.json();
-    this.setState({gastos: body});
-  }
-
-  render() {
-    const {gastos} = this.state;
-    return (
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <div className="App-intro">
-              <h2>Gastos</h2>
-              {gastos.map(gastos =>
-                  <div key={gastos.id}>
-                    {gastos.name} ({gastos.description}, Valor: {gastos.value})
-                  </div>
-              )}
-            </div>
-          </header>
-        </div>
-    );
-  }
-} */
 export default App;

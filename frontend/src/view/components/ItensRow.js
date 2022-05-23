@@ -10,33 +10,33 @@ import IconButton from '@mui/material/IconButton';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import './TableGastos.css';
+import './TableItens.css';
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-const GastosRow = ({gasto}) => {
+const ItensRow = ({item}) => {
 
     const navigate = useNavigate();
 
         const deleteRow = async () => {
-            let url = process.env.REACT_APP_API_URL_GASTOS + '/' + gasto.id;
+            let url = process.env.REACT_APP_API_URL_GASTOS + '/' + item.id;
             await axios.delete(url); 
         }
 
         const editRow = async () => {
-            navigate(`/home/new/${gasto.id}`);
+            navigate(`/home/new/${item.id}`);
         }
 
         return (
             <TableRow
-                key={gasto.name}
+                key={item.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                 <TableCell component="th" scope="row" className="lineNome">
-                    {gasto.name}
+                    {item.name}
                 </TableCell>
-                <TableCell align="right" className="line">{gasto.description}</TableCell>
-                <TableCell align="right" className="lineNome">{gasto.value}</TableCell>
+                <TableCell align="right" className="line">{item.description}</TableCell>
+                <TableCell align="right" className="lineNome">{item.value}</TableCell>
                 <TableCell align="right" className="lineIcons">
                     <IconButton
                         size="large"
@@ -68,4 +68,4 @@ const GastosRow = ({gasto}) => {
 
 }
 
-export default GastosRow
+export default ItensRow

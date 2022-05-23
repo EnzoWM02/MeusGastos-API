@@ -3,7 +3,7 @@ import axios from 'axios';
 import TopMenuBar from "./TopMenuBar";
 import { Button } from "reactstrap";
 import TextField from "@mui/material/TextField";
-import "./NewGastos.css"
+import "./NewItens.css"
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { toastContainer, toast } from 'react-toastify';
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,7 +12,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Stack from '@mui/material/Stack';
 
-const NewGastos = () => {
+const NewItens = () => {
 
     const { id } = useParams();
     const [fieldValues, setFieldValues] = useState({});
@@ -21,10 +21,11 @@ const NewGastos = () => {
 
     const navigate = useNavigate();
 
-    const [value, setValue] = useState(new Date('2014-08-18T21:11:54'));
+    const [dateValue, setDateValue] = useState(new Date(Date.now()));
 
     const handleChange = (e) => {
-        setValue(e);
+        setDateValue(e);
+        console.log(dateValue.toISOString());
     };
 
     const fetchGasto = async () => {
@@ -76,7 +77,7 @@ const NewGastos = () => {
     return (
         <>
             <div className="card ngcard">
-                <h2>Cadastrar novo gasto</h2>
+                <h2>Cadastrar novo item</h2>
                 {console.log(fieldValues.name)}
                 <TextField
                     className="textField"
@@ -115,18 +116,18 @@ const NewGastos = () => {
                     }}
                 />
                 <div className="dateField">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <Stack spacing={3}>
-                        <DesktopDatePicker
-                            
-                            label="Data"
-                            inputFormat="dd/MM/yyyy"
-                            value={value}
-                            onChange={(e) => handleChange(e)}
-                            renderInput={(params) => <TextField {...params} />}
-                        />
-                    </Stack>
-                </LocalizationProvider>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <Stack spacing={3}>
+                            <DesktopDatePicker
+                                label="Data"
+                                inputFormat="dd/MM/yyyy"
+                                value={dateValue}
+                                InputLabelProps={{ shrink: true }}
+                                onChange={(e) => handleChange(e)}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </Stack>
+                    </LocalizationProvider>
                 </div>
                 <Button className="filledButton" variant="contained" onClick={newGasto}>
                     Cadastrar
@@ -140,4 +141,4 @@ const NewGastos = () => {
 
 }
 
-export default NewGastos
+export default NewItens

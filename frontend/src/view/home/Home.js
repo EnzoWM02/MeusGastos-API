@@ -1,8 +1,8 @@
 import './Home.css';
 import React, {Component} from "react";
 import TopMenuBar from '../components/TopMenuBar';
-import TableGastos from '../components/TableGastos';
-import NewGastos from '../components/NewGastos';
+import TableItens from '../components/TableItens';
+import NewItens from '../components/NewItens';
 import {Button} from 'reactstrap';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
@@ -38,10 +38,10 @@ const Home = () => {
                     <TopMenuBar/>
                 </div>
                 <Routes>
-                    <Route path="/" element={<Navigate to="/home/gastos" />} />
-                    <Route path="/gastos" element={<TableGastos />} />
-                    <Route path="/new" element={<NewGastos />} />
-                    <Route path="/new/:id" element={<NewGastos />} />
+                    <Route path="/" element={<Navigate to="/home/itens" />} />
+                    <Route path="/itens" element={<TableItens />} />
+                    <Route path="/new" element={<NewItens />} />
+                    <Route path="/new/:id" element={<NewItens />} />
                 </Routes>
 
             </div>

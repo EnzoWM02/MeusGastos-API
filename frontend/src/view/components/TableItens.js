@@ -10,19 +10,19 @@ import IconButton from '@mui/material/IconButton';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import GastosRow from '../components/GastosRow';
+import ItensRow from '../components/ItensRow';
 import Tooltip from '@mui/material/Tooltip';
 import { useCookies } from "react-cookie";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { Button } from 'reactstrap';
-import './TableGastos.css';
+import './TableItens.css';
 import axios from 'axios';
 
 
-const TableGastos = () => {
+const TableItens = () => {
 
-    const [gastos, setGastos] = useState([]);
+    const [itens, setItens] = useState([]);
     const [total, setTotal] = useState(0);
 
     const navigate = useNavigate();
@@ -43,10 +43,10 @@ const TableGastos = () => {
         navigate('/home/new');
     }
 
-    async function fetchGastosAxios() {
+    async function fetchItensAxios() {
         try {
             const { data: response } = await axios.get(process.env.REACT_APP_API_URL_GASTOS);
-            setGastos(response);
+            setItens(response);
             let total = 0;
             response.map(function (key, index) {
                 total += response[index].value;
@@ -58,15 +58,15 @@ const TableGastos = () => {
         }
     }
     useEffect(() => {
-        fetchGastosAxios();
-    }, [gastos]);
+        fetchItensAxios();
+    }, [itens]);
 
     return (
         <>
             <div className="outside">
-                <div className="TableGastos">
+                <div className="TableItens">
                     <Button className="createButton filledButton" variant="contained" onClick={toGo}>
-                        Cadastrar novo gasto
+                        Cadastrar novo item
                     </Button>
                     <Tooltip title="Desfazer último">
                         <IconButton
@@ -93,9 +93,9 @@ const TableGastos = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {gastos.map(function (key, index) {
-                                    if (gastos[index].user_id == cookies.userid) {
-                                    return <GastosRow key={index} gasto={gastos[index]} />;
+                                {itens.map(function (key, index) {
+                                    if (itens[index].user_id == cookies.userid) {
+                                    return <ItensRow key={index} item={itens[index]} />;
                                     }
                                 })}
                                 <TableRow
@@ -119,4 +119,4 @@ const TableGastos = () => {
     );
 };
 
-export default TableGastos;
+export default TableItens;

@@ -3,7 +3,7 @@ package neko.project.meusgastos.user;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import neko.project.meusgastos.gastos.Gastos;
+import neko.project.meusgastos.itens.Itens;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +28,7 @@ public class Users {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")    
-    private List<Gastos> gastos;
+    private List<Itens> gastos;
 
     @CreationTimestamp
     @Column(updatable = false)    
