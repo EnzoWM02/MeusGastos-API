@@ -30,6 +30,10 @@ public class GastosController {
 
     @PostMapping
     public ResponseEntity createGastos(@RequestBody Gastos gastos) throws URISyntaxException {
+        System.out.println(gastos.getName());
+        System.out.println(gastos.getDescription());
+        System.out.println(gastos.getValue());
+        System.out.println(gastos.getUser_id());
         Gastos savedClient = gastosRepository.save(gastos);
         return ResponseEntity.created(new URI("/gastos/" + savedClient.getId())).body(savedClient);
     }

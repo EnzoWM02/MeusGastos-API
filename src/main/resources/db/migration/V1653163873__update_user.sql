@@ -1,3 +1,5 @@
+DROP TABLE Users;
+
 CREATE TABLE Users (
     id BIGSERIAL primary key,
     password TEXT NOT NULL,
