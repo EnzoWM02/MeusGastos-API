@@ -1,0 +1,16 @@
+
+.filterDateFieldMax {
+    margin-top: 5%;
+}
+
+.filterButtonDiv {
+    position: relative;
+    width: 40% !important;
+    margin-top: 5%;
+    float: right;
+    margin-bottom: 5%;
+}
+
+.outsideFilter {
+    padding: 12px;
+}

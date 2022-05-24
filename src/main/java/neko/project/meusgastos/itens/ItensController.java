@@ -30,8 +30,6 @@ public class ItensController {
 
     @PostMapping
     public ResponseEntity createItens(@RequestBody Itens itens) throws URISyntaxException {
-        System.out.println(itens.getName());
-        System.out.println(itens.getItem_date());
         Itens savedClient = itensRepository.save(itens);
         return ResponseEntity.created(new URI("/itens/" + savedClient.getId())).body(savedClient);
     }
@@ -39,8 +37,6 @@ public class ItensController {
     @PutMapping("/{id}")
     public ResponseEntity updateItens(@PathVariable int id, @RequestBody Itens itens) {
         Itens currentItem = itensRepository.findById(id).orElseThrow(RuntimeException::new);
-        System.out.println(itens.getName());
-        System.out.println(itens.getItem_date());
         currentItem.setName(itens.getName());
         currentItem.setDescription(itens.getDescription());
         currentItem.setValue(itens.getValue());
