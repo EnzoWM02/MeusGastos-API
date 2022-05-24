@@ -87,6 +87,7 @@ const TableItens = () => {
                                 <TableRow>
                                     <TableCell><b>Nome</b></TableCell>
                                     <TableCell align="left"><b>Descrição</b></TableCell>
+                                    <TableCell align="left"><b>Data</b></TableCell>
                                     <TableCell align="right"><b>Valor</b></TableCell>
                                     <TableCell align="right"></TableCell>
                                     <TableCell align="right"></TableCell>
@@ -105,6 +106,7 @@ const TableItens = () => {
                                     <TableCell component="th" scope="row">
 
                                     </TableCell>
+                                    <TableCell align="left"><b></b></TableCell>
                                     <TableCell align="left"><b>Total</b></TableCell>
                                     <TableCell align="right">{total}</TableCell>
                                 </TableRow>

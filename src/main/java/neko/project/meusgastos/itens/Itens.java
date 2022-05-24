@@ -3,6 +3,7 @@ package neko.project.meusgastos.itens;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,9 @@ public class Itens {
     private String description;
     private Double value;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDateTime item_date;
+
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -33,11 +37,12 @@ public class Itens {
     public Itens() {
     }
 
-    public Itens(String name, String description, Double value, int user_id) {
+    public Itens(String name, String description, Double value, int user_id, LocalDateTime item_date) {
         this.name = name;
         this.description = description;
         this.value = value;
         this.user_id = user_id;
+        this.item_date = item_date;
     }
 
     public int getId() {
@@ -96,6 +101,11 @@ public class Itens {
         this.user_id = user_id;
     }
 
-    
-    
+    public LocalDateTime getItem_date() {
+        return item_date;
+    }
+
+    public void setItem_date(LocalDateTime item_date) {
+        this.item_date = item_date;
+    }    
 }

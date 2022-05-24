@@ -31,22 +31,23 @@ public class ItensController {
     @PostMapping
     public ResponseEntity createItens(@RequestBody Itens itens) throws URISyntaxException {
         System.out.println(itens.getName());
-        System.out.println(itens.getDescription());
-        System.out.println(itens.getValue());
-        System.out.println(itens.getUser_id());
+        System.out.println(itens.getItem_date());
         Itens savedClient = itensRepository.save(itens);
         return ResponseEntity.created(new URI("/itens/" + savedClient.getId())).body(savedClient);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity updateItens(@PathVariable int id, @RequestBody Itens itens) {
-        Itens currentGasto = itensRepository.findById(id).orElseThrow(RuntimeException::new);
-        currentGasto.setName(itens.getName());
-        currentGasto.setDescription(itens.getDescription());
-        currentGasto.setValue(itens.getValue());
-        currentGasto = itensRepository.save(currentGasto);
+        Itens currentItem = itensRepository.findById(id).orElseThrow(RuntimeException::new);
+        System.out.println(itens.getName());
+        System.out.println(itens.getItem_date());
+        currentItem.setName(itens.getName());
+        currentItem.setDescription(itens.getDescription());
+        currentItem.setValue(itens.getValue());
+        currentItem.setItem_date(itens.getItem_date());
+        currentItem = itensRepository.save(currentItem);
 
-        return ResponseEntity.ok(currentGasto);
+        return ResponseEntity.ok(currentItem);
     }
 
     @DeleteMapping("/{id}")

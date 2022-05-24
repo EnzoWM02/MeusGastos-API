@@ -36,6 +36,7 @@ const ItensRow = ({item}) => {
                     {item.name}
                 </TableCell>
                 <TableCell align="right" className="line">{item.description}</TableCell>
+                <TableCell align="right" className="line">{item.item_date.substring(0,10)}</TableCell>
                 <TableCell align="right" className="lineNome">{item.value}</TableCell>
                 <TableCell align="right" className="lineIcons">
                     <IconButton

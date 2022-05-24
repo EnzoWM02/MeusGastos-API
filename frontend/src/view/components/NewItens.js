@@ -25,7 +25,6 @@ const NewItens = () => {
 
     const handleChange = (e) => {
         setDateValue(e);
-        console.log(dateValue.toISOString());
     };
 
     const fetchGasto = async () => {
@@ -38,6 +37,7 @@ const NewItens = () => {
                     description: data.description,
                     value: data.value
                 });
+                setDateValue(new Date(data.item_date));
             }
         } catch (e) {
             console.log(e);
@@ -53,15 +53,15 @@ const NewItens = () => {
         let description = fieldValues.description;
         let value = fieldValues.value;
         let user_id = cookies.userid;
-        console.log(cookies.userid);
+        let item_date = dateValue.toISOString();
         try {
             if (!id) {
-                const data = await axios.post(process.env.REACT_APP_API_URL_GASTOS, { name, description, value, user_id });
+                const data = await axios.post(process.env.REACT_APP_API_URL_GASTOS, { name, description, value, user_id, item_date});
                 setCookie('last', data.data.id, { path: '/', maxAge: '360000' });
             } else {
                 let url = process.env.REACT_APP_API_URL_GASTOS + '/' + id;
 
-                await axios.put(url, { name, description, value, user_id });
+                await axios.put(url, { name, description, value, user_id, item_date });
             }
             navigate('/home');
         } catch (e) {
@@ -78,7 +78,6 @@ const NewItens = () => {
         <>
             <div className="card ngcard">
                 <h2>Cadastrar novo item</h2>
-                {console.log(fieldValues.name)}
                 <TextField
                     className="textField"
                     id="name"
