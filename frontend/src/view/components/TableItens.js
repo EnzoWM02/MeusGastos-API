@@ -83,7 +83,7 @@ const TableItens = () => {
         <>
             <div className="outside">
                 <div className="TableItens">
-                    <Button className="createButton filledButton" variant="contained" onClick={toGo}>
+                    <Button className="createButton filledButtonCreate" variant="contained" onClick={toGo}>
                         Cadastrar novo item
                     </Button>
                     <Tooltip title="Desfazer último">
@@ -129,9 +129,9 @@ const TableItens = () => {
                         <FilterDialog />
                     </Menu>
                     <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
+                        <Table sx={{ minWidth: 650, borderTop: '1px solid #ccc' }} aria-label="simple table">
+                            <TableHead sx={{backgroundColor: '#6D7AE0'}}>
+                                <TableRow sx={{}}>
                                     <TableCell><b>Nome</b></TableCell>
                                     <TableCell align="left"><b>Descrição</b></TableCell>
                                     <TableCell align="left"><b>Data</b></TableCell>

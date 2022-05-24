@@ -22,3 +22,22 @@
     right: 10% !important;
 }
 
+.TableItens {
+    background-color: #C6D2F8;
+    border-radius: 5px;
+}
+
+.filledButtonCreate {
+    border-color: #707070 !important;
+    background-color: #6D7AE0 !important;
+    color: #ffffff !important;
+  }
+  
+  .filledButtonCreate:hover {
+    background-color: #ffffff !important;
+    color: #6D7AE0 !important;
+  }
+
+  b {
+      color: #ffffff
+  }

@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import './TableItens.css';
+import './ItensRow.css';
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -30,7 +30,8 @@ const ItensRow = ({item}) => {
         return (
             <TableRow
                 key={item.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                sx={{ '&:last-child td, &:last-child th': { border: 0, color: '#ffffff' } }}
+                className="tableRows"
             >
                 <TableCell component="th" scope="row" className="lineNome">
                     {item.name}
