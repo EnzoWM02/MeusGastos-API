@@ -3,14 +3,14 @@
     margin-top: 5%;
 }
 
-.filterButtonDiv {
-    position: relative;
+.filterButton {
     width: 40% !important;
-    margin-top: 5%;
-    float: right;
-    margin-bottom: 5%;
+    margin-top: 6%;
+    margin-left: 60%;
 }
 
 .outsideFilter {
-    padding: 12px;
+    color: white;
+    padding: 12px;    
+    background-image: inherit;
 }

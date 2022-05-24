@@ -30,8 +30,7 @@ const ItensRow = ({item}) => {
         return (
             <TableRow
                 key={item.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0, color: '#ffffff' } }}
-                className="tableRows"
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                 <TableCell component="th" scope="row" className="lineNome">
                     {item.name}

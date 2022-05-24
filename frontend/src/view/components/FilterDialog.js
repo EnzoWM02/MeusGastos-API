@@ -49,11 +49,9 @@ const FilterDialog = () => {
                         </Stack>
                     </LocalizationProvider>
                 </div>
-                <div className="filterButtonDiv">
-                <Button className="filterButton filledButton" variant="contained" onClick={console.log("w")}>
+                <Button className="filterButton filledButtonCreate" variant="contained" onClick={console.log("w")}>
                         Filtrar
                     </Button>
-                    </div>
         </div>
 
     );

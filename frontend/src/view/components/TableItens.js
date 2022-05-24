@@ -25,7 +25,6 @@ import Typography from '@mui/material/Typography';
 import './TableItens.css';
 import axios from 'axios';
 
-
 const TableItens = () => {
 
     const [itens, setItens] = useState([]);
@@ -80,7 +79,7 @@ const TableItens = () => {
     }, [itens]);
 
     return (
-        <>
+
             <div className="outside">
                 <div className="TableItens">
                     <Button className="createButton filledButtonCreate" variant="contained" onClick={toGo}>
@@ -96,41 +95,44 @@ const TableItens = () => {
                             className="returnIcon"
                             onClick={deleteLast}
                         >
-                            <KeyboardReturnIcon />
+                            <KeyboardReturnIcon style={{ color: '#ffffff' }}/>
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Filtrar itens">
                         <IconButton
                             size="large"
                             edge="start"
-                            aria-label="events-menu"
+                            aria-label="filter-menu"
                             sx={{ mr: 2 }}
-                            id="events-button"
+                            id="filter-button"
                             className="filterIcon"
-                            aria-controls={openFilter ? 'events-menu' : undefined}
+                            aria-controls={openFilter ? 'filter-menu' : undefined}
                             aria-haspopup="true"
                             aria-expanded={openFilter ? 'true' : undefined}
                             onClick={handleClickFilter}
                         >
-                            <FilterListIcon />
+                            <FilterListIcon style={{ color: '#ffffff' }}/>
                         </IconButton>
                     </Tooltip>
                     <Menu
-                        id="events-menu"
+                        id="filter-menu"
+                        className="filter"
                         anchorEl={anchorElFilter}
                         anchorOrigin={{ vertical: "bottom", horizontal: "center" }} //Faz sair do meio do icone
                         transformOrigin={{ vertical: "top", horizontal: "center" }}
                         open={openFilter}
-                        onClose={handleCloseFilter}
-                        MenuListProps={{
-                            'aria-labelledby': 'events-button',
+                        onClose={handleCloseFilter}                        
+                        MenuListProps={{          
+                            sx:{
+                                backgroundImage: 'linear-gradient(#5b467e, #2E2944)'},                 
+                            'aria-labelledby': 'filter-button'
                         }}
                     >
-                        <FilterDialog />
+                        <FilterDialog  />
                     </Menu>
-                    <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650, borderTop: '1px solid #ccc' }} aria-label="simple table">
-                            <TableHead sx={{backgroundColor: '#6D7AE0'}}>
+                    <TableContainer sx={{borderRadius: '10px'}}/*component={Paper}*/>
+                        <Table sx={{ minWidth: 650, borderRadius: '20px', backgroundImage: 'inherit', boxShadow:'none' }} aria-label="simple table">
+                            <TableHead sx={{backgroundColor: '#1E1C2C'}}>
                                 <TableRow sx={{}}>
                                     <TableCell><b>Nome</b></TableCell>
                                     <TableCell align="left"><b>Descrição</b></TableCell>
@@ -155,14 +157,13 @@ const TableItens = () => {
                                     </TableCell>
                                     <TableCell align="left"><b></b></TableCell>
                                     <TableCell align="left"><b>Total</b></TableCell>
-                                    <TableCell align="right">{total}</TableCell>
+                                    <TableCell align="right"><b>{total}</b></TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>
                 </div>
             </div>
-        </>
 
 
     );

@@ -47,7 +47,7 @@ const TopMenuBar = () => {
                             aria-expanded={open2 ? 'true' : undefined}
                             onClick={handleClick2}
                         >
-                            <MenuIcon />
+                            <MenuIcon style={{ color: '#7C8192' }}/>
                         </IconButton>
                         <Menu
                             id="events-menu"
