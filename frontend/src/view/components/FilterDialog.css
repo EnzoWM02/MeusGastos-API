@@ -1,3 +1,6 @@
+.filterDateFieldMin {
+    margin-top: 2%;
+}
 
 .filterDateFieldMax {
     margin-top: 5%;
@@ -10,7 +13,11 @@
 }
 
 .outsideFilter {
-    color: white;
     padding: 12px;    
     background-image: inherit;
+    border-radius: 20px;
+}
+
+body {
+    background-color: black;
 }

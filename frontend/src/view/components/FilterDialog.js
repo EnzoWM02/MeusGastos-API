@@ -9,7 +9,7 @@ import './FilterDialog.css';
 
 const FilterDialog = () => {
 
-    const [dateValueMin, setDateValueMin] = useState(new Date(Date.now()));
+    const [dateValueMin, setDateValueMin] = useState(new Date(Date.now()-7));
     const [dateValueMax, setDateValueMax] = useState(new Date(Date.now()));
 
     const handleChangeMin = (e) => {
@@ -30,8 +30,13 @@ const FilterDialog = () => {
                                 label="Menor data"
                                 inputFormat="dd/MM/yyyy"
                                 value={dateValueMin}
+                                className="datePicker"
                                 onChange={(e) => handleChangeMin(e)}
-                                renderInput={(params) => <TextField {...params} />}
+                                renderInput={(params) => <TextField {...params} sx={{
+                                        svg: { color:'white' },
+                                        input: { color:'white' },
+                                        label: { color:'white' }
+                                }}/>}
                             />
                         </Stack>
                     </LocalizationProvider>
@@ -44,7 +49,11 @@ const FilterDialog = () => {
                                 inputFormat="dd/MM/yyyy"
                                 value={dateValueMax}
                                 onChange={(e) => handleChangeMax(e)}
-                                renderInput={(params) => <TextField {...params} />}
+                                renderInput={(params) => <TextField {...params} sx={{
+                                    svg: { color:'white' },
+                                    input: { color:'white' },
+                                    label: { color:'white' }
+                            }}/>}
                             />
                         </Stack>
                     </LocalizationProvider>

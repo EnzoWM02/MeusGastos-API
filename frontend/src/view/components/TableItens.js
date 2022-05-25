@@ -121,11 +121,17 @@ const TableItens = () => {
                         anchorOrigin={{ vertical: "bottom", horizontal: "center" }} //Faz sair do meio do icone
                         transformOrigin={{ vertical: "top", horizontal: "center" }}
                         open={openFilter}
-                        onClose={handleCloseFilter}                        
+                        onClose={handleCloseFilter}     
+                        sx={{borderRadius: '20px !important', backgroundColor: 'transparent'}}
+                        PaperProps={{sx:{backgroundColor:'transparent', borderRadius: '20px'}}}  //Desgraça de paper, foi horrivel de achar esse props até na API       
                         MenuListProps={{          
                             sx:{
-                                backgroundImage: 'linear-gradient(#5b467e, #2E2944)'},                 
-                            'aria-labelledby': 'filter-button'
+                                backgroundImage: 'linear-gradient(#5b467e, #2E2944)',
+                                border: 'solid 2px #483C6C',
+                                borderRadius: '20px',
+                                backgroundColor: 'black'
+                            },                 
+                                'aria-labelledby': 'filter-button'
                         }}
                     >
                         <FilterDialog  />
