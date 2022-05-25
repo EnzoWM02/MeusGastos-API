@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import { Button } from "reactstrap";
 import './FilterDialog.css';
 
-const FilterDialog = () => {
+const FilterDialog = ({applyFilter}) => {
 
     const [dateValueMin, setDateValueMin] = useState(new Date(Date.now()-7));
     const [dateValueMax, setDateValueMax] = useState(new Date(Date.now()));
@@ -58,7 +58,7 @@ const FilterDialog = () => {
                         </Stack>
                     </LocalizationProvider>
                 </div>
-                <Button className="filterButton filledButtonCreate" variant="contained" onClick={console.log("w")}>
+                <Button className="filterButton filledButtonCreate" variant="contained" onClick={() => applyFilter({dateValueMin, dateValueMax})}>
                         Filtrar
                     </Button>
         </div>

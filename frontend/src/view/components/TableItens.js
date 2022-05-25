@@ -34,6 +34,8 @@ const TableItens = () => {
     const navigate = useNavigate();
     const [cookies, setCookie] = useCookies(['user']);
 
+    const [filter, setFilter] = useState({});
+
     const openFilter = !!anchorElFilter;
     const handleClickFilter = (event) => {
         setAnchorElFilter(event.currentTarget);
@@ -41,10 +43,6 @@ const TableItens = () => {
     const handleCloseFilter = () => {
         setAnchorElFilter(null);
     };
-
-    const filterMenu = async () => {
-        console.log("happen")
-    }
 
     const deleteLast = async () => {
         try {
@@ -60,9 +58,20 @@ const TableItens = () => {
         navigate('/home/new');
     }
 
+    const applyFilter = (filter) => {
+        setFilter(filter);
+    }
+
     async function fetchItensAxios() {
         try {
-            const { data: response } = await axios.get(process.env.REACT_APP_API_URL_GASTOS);
+            let { data: response } = await axios.get(process.env.REACT_APP_API_URL_GASTOS);
+            if (typeof(filter.dateValueMin) !== 'undefined') {
+            console.log((filter.dateValueMin));
+            response = response.filter((item) => {
+               return item.item_date >= new Date(filter.dateValueMin).toISOString()
+               && item.item_date <= new Date(filter.dateValueMax).toISOString() ? true : false;
+            })
+        }
             setItens(response);
             let total = 0;
             response.map(function (key, index) {
@@ -76,7 +85,7 @@ const TableItens = () => {
     }
     useEffect(() => {
         fetchItensAxios();
-    }, [itens]);
+    }, [filter]);
 
     return (
 
@@ -133,7 +142,7 @@ const TableItens = () => {
                                 'aria-labelledby': 'filter-button'
                         }}
                     >
-                        <FilterDialog  />
+                        <FilterDialog applyFilter={applyFilter}/>
                     </Menu>
                     <TableContainer sx={{borderRadius: '10px'}}/*component={Paper}*/>
                         <Table sx={{ minWidth: 650, borderRadius: '20px', backgroundImage: 'inherit', boxShadow:'none' }} aria-label="simple table">
