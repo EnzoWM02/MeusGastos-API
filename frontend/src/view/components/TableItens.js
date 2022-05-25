@@ -121,8 +121,7 @@ const TableItens = () => {
                         anchorOrigin={{ vertical: "bottom", horizontal: "center" }} //Faz sair do meio do icone
                         transformOrigin={{ vertical: "top", horizontal: "center" }}
                         open={openFilter}
-                        onClose={handleCloseFilter}     
-                        sx={{borderRadius: '20px !important', backgroundColor: 'transparent'}}
+                        onClose={handleCloseFilter}
                         PaperProps={{sx:{backgroundColor:'transparent', borderRadius: '20px'}}}  //Desgraça de paper, foi horrivel de achar esse props até na API       
                         MenuListProps={{          
                             sx:{

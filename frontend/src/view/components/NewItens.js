@@ -11,6 +11,18 @@ import { useCookies } from 'react-cookie';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Stack from '@mui/material/Stack';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#ffffff'
+      },
+      secondary: {
+        main: '#11cb5f',
+      },
+    },
+  });
 
 const NewItens = () => {
 
@@ -75,9 +87,9 @@ const NewItens = () => {
     }, []);
 
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <div className="card ngcard">
-                <h2>Cadastrar novo item</h2>
+                <h2><b>Cadastrar novo item</b></h2>
                 <TextField
                     className="textField"
                     id="name"
@@ -85,6 +97,9 @@ const NewItens = () => {
                     label="Nome"
                     InputLabelProps={{ shrink: true }}
                     variant="outlined"
+                    sx={{label: {color:'white'},
+                         input: {color:'white'}
+                        }}
                     type="text"
                     onChange={(e) => {
                         setFieldValues({ ...fieldValues, name: e.target.value });
@@ -96,6 +111,9 @@ const NewItens = () => {
                     value={fieldValues.description}
                     InputLabelProps={{ shrink: true }}
                     label="Descrição"
+                    sx={{label: {color:'white'},
+                         input: {color:'white'}
+                        }}
                     variant="outlined"
                     type="text"
                     onChange={(e) => {
@@ -108,6 +126,9 @@ const NewItens = () => {
                     value={fieldValues.value}
                     InputLabelProps={{ shrink: true }}
                     label="Valor"
+                    sx={{label: {color:'white'},
+                         input: {color:'white'}
+                        }}
                     variant="outlined"
                     Input type="number"
                     onChange={(e) => {
@@ -123,19 +144,23 @@ const NewItens = () => {
                                 value={dateValue}
                                 InputLabelProps={{ shrink: true }}
                                 onChange={(e) => handleChange(e)}
-                                renderInput={(params) => <TextField {...params} />}
+                                renderInput={(params) => <TextField {...params} sx={{
+                                    svg: { color:'white' },
+                                    input: { color:'white' },
+                                    label: { color:'white' }
+                            }}/>}
                             />
                         </Stack>
                     </LocalizationProvider>
                 </div>
-                <Button className="filledButton" variant="contained" onClick={newGasto}>
+                <Button className="signupButton outlinedButton filledButtonCreate" variant="contained" onClick={newGasto}>
                     Cadastrar
                 </Button>
-                <Button className="signupButton outlinedButton" variant="outlined" onClick={backToMain}>
+                <Button className="signupButton outlinedButton filledButtonVoltar" variant="outlined" onClick={backToMain}>
                     Voltar
                 </Button>
             </div>
-        </>
+        </ThemeProvider>
     );
 
 }
