@@ -7,10 +7,10 @@ import TextField from "@mui/material/TextField";
 import { Button } from "reactstrap";
 import './FilterDialog.css';
 
-const FilterDialog = ({applyFilter, handleCloseFilter}) => {
+const FilterDialog = ({filter, applyFilter, handleCloseFilter}) => {
 
-    const [dateValueMin, setDateValueMin] = useState(new Date(Date.now()-7));
-    const [dateValueMax, setDateValueMax] = useState(new Date(Date.now()));
+    const [dateValueMin, setDateValueMin] = useState(filter.dateValueMin);
+    const [dateValueMax, setDateValueMax] = useState(filter.dateValueMax);
 
     const handleChangeMin = (e) => {
         setDateValueMin(e);

@@ -5,14 +5,10 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import TextField from "@mui/material/TextField";
 import Menu from '@mui/material/Menu';
-import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import FilterDialog from './FilterDialog';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import ItensRow from '../components/ItensRow';
 import Tooltip from '@mui/material/Tooltip';
 import { useCookies } from "react-cookie";
@@ -20,8 +16,6 @@ import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Button } from 'reactstrap';
-import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
 import './TableItens.css';
 import axios from 'axios';
 
@@ -66,7 +60,6 @@ const TableItens = () => {
         try {
             let { data: response } = await axios.get(process.env.REACT_APP_API_URL_GASTOS);
             if (typeof(filter.dateValueMin) !== 'undefined') {
-            console.log((filter.dateValueMin));
             response = response.filter((item) => {
                return item.item_date >= new Date(filter.dateValueMin).toISOString()
                && item.item_date <= new Date(filter.dateValueMax).toISOString() ? true : false;
@@ -142,7 +135,7 @@ const TableItens = () => {
                                 'aria-labelledby': 'filter-button'
                         }}
                     >
-                        <FilterDialog applyFilter={applyFilter} handleCloseFilter={handleCloseFilter} />
+                        <FilterDialog filter={filter} applyFilter={applyFilter} handleCloseFilter={handleCloseFilter} />
                     </Menu>
                     <TableContainer sx={{borderRadius: '10px'}}/*component={Paper}*/>
                         <Table sx={{ minWidth: 650, borderRadius: '20px', backgroundImage: 'inherit', boxShadow:'none' }} aria-label="simple table">
