@@ -142,7 +142,7 @@ const TableItens = () => {
                                 'aria-labelledby': 'filter-button'
                         }}
                     >
-                        <FilterDialog applyFilter={applyFilter}/>
+                        <FilterDialog applyFilter={applyFilter} handleCloseFilter={handleCloseFilter} />
                     </Menu>
                     <TableContainer sx={{borderRadius: '10px'}}/*component={Paper}*/>
                         <Table sx={{ minWidth: 650, borderRadius: '20px', backgroundImage: 'inherit', boxShadow:'none' }} aria-label="simple table">
