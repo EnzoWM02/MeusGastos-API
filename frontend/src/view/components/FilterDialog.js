@@ -9,8 +9,8 @@ import './FilterDialog.css';
 
 const FilterDialog = ({filter, applyFilter, handleCloseFilter}) => {
 
-    const [dateValueMin, setDateValueMin] = useState(filter.dateValueMin);
-    const [dateValueMax, setDateValueMax] = useState(filter.dateValueMax);
+    const [dateValueMin, setDateValueMin] = useState(filter.dateValueMin ? filter.dateValueMin : new Date(Date.now()));
+    const [dateValueMax, setDateValueMax] = useState(filter.dateValueMax ? filter.dateValueMax : new Date(Date.now()));
 
     const handleChangeMin = (e) => {
         setDateValueMin(e);

@@ -60,6 +60,7 @@ const TableItens = () => {
         try {
             let { data: response } = await axios.get(process.env.REACT_APP_API_URL_GASTOS);
             if (typeof(filter.dateValueMin) !== 'undefined') {
+            console.log((filter.dateValueMin));
             response = response.filter((item) => {
                return item.item_date >= new Date(filter.dateValueMin).toISOString()
                && item.item_date <= new Date(filter.dateValueMax).toISOString() ? true : false;
