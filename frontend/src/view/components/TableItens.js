@@ -59,9 +59,7 @@ const TableItens = () => {
     async function fetchItensAxios() {
         try {
             let { data: response } = await axios.get(process.env.REACT_APP_API_URL_GASTOS);
-            console.log("passou aq");
             if (typeof(filter.dateValueMin) !== 'undefined') {
-            console.log((filter.dateValueMin));
             response = response.filter((item) => {
                return item.item_date >= new Date(filter.dateValueMin).toISOString()
                && item.item_date <= new Date(filter.dateValueMax).toISOString() ? true : false;
