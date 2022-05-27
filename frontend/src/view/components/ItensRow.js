@@ -14,13 +14,14 @@ import './ItensRow.css';
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-const ItensRow = ({item}) => {
+const ItensRow = ({item, fetchItensAxios}) => {
 
     const navigate = useNavigate();
 
         const deleteRow = async () => {
             let url = process.env.REACT_APP_API_URL_GASTOS + '/' + item.id;
             await axios.delete(url); 
+            fetchItensAxios();
         }
 
         const editRow = async () => {
