@@ -1,4 +1,4 @@
-package neko.project.meusgastos.itens;
+package neko.project.meusgastos.users;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import neko.project.meusgastos.BaseIntegrationTest;
@@ -20,10 +20,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class ItensResourceTest extends BaseIntegrationTest {
-
-    @Autowired
-    private ItensRepository itensRepository;
+public class UsersResourceTest extends BaseIntegrationTest {
 
     @Autowired
     private UserRepository userRepository;
@@ -31,8 +28,8 @@ public class ItensResourceTest extends BaseIntegrationTest {
     @BeforeEach
     void setUp() {
 
-        final List<Users> usersList = userRepository.saveAllAndFlush(
-                IntStream.range(0, 2)
+        userRepository.saveAll(
+                IntStream.range(0, 10)
                         .mapToObj(i -> {
                             final Users users = new Users();
                             users.setEmail("teste@admin.com");
@@ -43,30 +40,13 @@ public class ItensResourceTest extends BaseIntegrationTest {
                         })
                         .collect(Collectors.toList())
         );
-
-        itensRepository.saveAll(
-                IntStream.range(0, 10)
-                        .mapToObj(i -> {
-                            final Itens itens = new Itens();
-                            itens.setName("Hello " + i);
-                            itens.setDescription("world" + i + "@test.ccom");
-                            itens.setValue(100.0);
-                            itens.setUser_id(Integer.parseInt(""+usersList.get(1).getId()));
-                            itens.setItem_date(LocalDateTime.now());
-                            itens.setCreatedAt(LocalDateTime.now());
-                            itens.setUpdatedAt(LocalDateTime.now());
-
-                            return itens;
-                        })
-                        .collect(Collectors.toList())
-        );
     }
     
     @Test
     void findAll() throws Exception {
         this.mvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/itens")
+                                .get("/api/user")
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk());
                 
@@ -75,34 +55,21 @@ public class ItensResourceTest extends BaseIntegrationTest {
     @Test
     void findOne() throws Exception {
 
-        final Itens item = createItem();
-        final Itens persistedCustomer = itensRepository.save(item);
+        final Users item = createUser();
+        final Users persistedCustomer = userRepository.save(item);
 
         this.mvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/itens/{id}", item.getId())
+                                .get("/api/user/{id}", item.getId())
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(result -> {
-                    final Itens response = objectMapper.readValue(result.getResponse().getContentAsByteArray(), Itens.class);
+                    final Users response = objectMapper.readValue(result.getResponse().getContentAsByteArray(), Users.class);
                     Assertions.assertEquals(persistedCustomer.getId(), response.getId());
                 });
 
     }
 
-    private Itens createItem() {
-        Itens item = new Itens();
-        item.setName("Nome Teste");
-        item.setDescription("Descrição teste");        
-        item.setValue(100.0);
-        Users user = createUser();
-        Users persistedUser = userRepository.save(user);
-        item.setUser_id(Integer.parseInt(""+persistedUser.getId()));
-        item.setItem_date(LocalDateTime.now());
-        item.setCreatedAt(LocalDateTime.now());
-        item.setUpdatedAt(LocalDateTime.now());
-        return item;
-    }
 
     private Users createUser() {
         Users user = new Users();
@@ -116,58 +83,56 @@ public class ItensResourceTest extends BaseIntegrationTest {
     @Test
     void save() throws Exception {
 
-        final Itens item = createItem();
+        final Users item = createUser();
         final String reqBody = objectMapper.writeValueAsString(item);
 
         this.mvc.perform(
                         MockMvcRequestBuilders
-                                .post("/api/itens")
+                                .post("/api/user")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(reqBody)
                 )
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(result -> {
-                    final Itens response = objectMapper.readValue(result.getResponse().getContentAsByteArray(), Itens.class);
-                    Assertions.assertTrue(itensRepository.existsById(response.getId()));
-                    Assertions.assertEquals(item.getName(), response.getName());
-                    Assertions.assertEquals(item.getDescription(), response.getDescription());
-                    Assertions.assertEquals(item.getValue(), response.getValue());
+                    final Users response = objectMapper.readValue(result.getResponse().getContentAsByteArray(), Users.class);
+                    Assertions.assertTrue(userRepository.existsById(response.getId()));
+                    Assertions.assertEquals(item.getEmail(), response.getEmail());
                 });
 
     }
 
     @Test
     void update() throws Exception {
-        Itens item = findOneItem();
+        Users item = findOneUser();
 
-        final String originalName = item.getName();
+        final String originalEmail = item.getEmail();
         final LocalDateTime originalUpdateDate = item.getUpdatedAt();
-        item.setName("Nome mudado teste");
+        item.setEmail("new@email");
 
         final String reqBody = objectMapper.writeValueAsString(item);
 
         this.mvc.perform(
                         MockMvcRequestBuilders
-                                .put("/api/itens/{id}", item.getId())
+                                .put("/api/user/{id}", item.getId())
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(reqBody)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(result -> {
-                    final Itens response = objectMapper.readValue(result.getResponse().getContentAsByteArray(), Itens.class);
+                    final Users response = objectMapper.readValue(result.getResponse().getContentAsByteArray(), Users.class);
 
-                    Assertions.assertTrue(itensRepository.existsById(response.getId()));
-                    Assertions.assertEquals("Nome mudado teste", response.getName());
+                    Assertions.assertTrue(userRepository.existsById(response.getId()));
+                    Assertions.assertEquals("new@email", response.getEmail());
 
-                    final Itens persistedItem = itensRepository.getById(item.getId());
-                    Assertions.assertNotEquals(persistedItem.getName(), originalName);
+                    final Users persistedItem = userRepository.getById(item.getId());
+                    Assertions.assertNotEquals(persistedItem.getEmail(), originalEmail);
                     Assertions.assertNotEquals(persistedItem.getUpdatedAt(), originalUpdateDate);
                 });
 
     }
 
-    private Itens findOneItem() {
-        return itensRepository.findAll(PageRequest.of(0, 1))
+    private Users findOneUser() {
+        return userRepository.findAll(PageRequest.of(0, 1))
                 .getContent()
                 .get(0);
     }
@@ -176,15 +141,15 @@ public class ItensResourceTest extends BaseIntegrationTest {
     @Test
     void remove() throws Exception {
 
-        final Itens item = findOneItem();
+        final Users item = findOneUser();
         this.mvc.perform(
                         MockMvcRequestBuilders
-                                .delete("/api/itens/{id}", item.getId())
+                                .delete("/api/user/{id}", item.getId())
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(result -> {
-                    Assertions.assertFalse(itensRepository.existsById(item.getId()));
+                    Assertions.assertFalse(userRepository.existsById(item.getId()));
                 });
 
     }
