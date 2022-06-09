@@ -1,6 +1,7 @@
 .idea/
 target/
 .mvn/
+frontend/node_modules/
 HELP.md
 mvnw
 mvnw.cmd

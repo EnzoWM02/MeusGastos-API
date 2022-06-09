@@ -1,0 +1,17 @@
+.Login .signupRedirect {
+    width: 100%;
+}
+
+.loginRedirect {
+    text-decoration: none;
+}
+
+#text1 {
+    font-size: 15px;
+    align-self: start;
+}
+
+.checkboxKeepLogin {
+    align-self: start;
+    font-size: 15px;
+}    
