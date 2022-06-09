@@ -1,1 +1,1 @@
-web: java -jar -Dspring.profiles.active=dev target/MeusGastos-0.0.1-SNAPSHOT.jar
+web: java -jar -Dspring.profiles.active=prod target/MeusGastos-0.0.1-SNAPSHOT.jar
