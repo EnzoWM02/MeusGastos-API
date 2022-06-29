@@ -7,7 +7,6 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                git 'https://github.com/EnzoWM02/MeusGastos-API.git'
                 sh 'mvn test'
             }
         }
