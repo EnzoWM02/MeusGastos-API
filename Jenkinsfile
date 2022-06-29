@@ -4,10 +4,10 @@ pipeline {
     stages {
         stage('Build') {
             agent {
-                docker { image 'maven' }
+                docker { image 'maven' alwaysPull true }
             }
             steps {
-                sh "mvn test"
+                sh 'mvn test'
             }
         }
     }
