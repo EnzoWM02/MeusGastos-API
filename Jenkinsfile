@@ -9,7 +9,10 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'mvn test'
+                script {
+                    System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS", true);
+                }
+                sh 'mvn test'                
             }
         }
     }
