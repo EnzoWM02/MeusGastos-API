@@ -1,15 +1,11 @@
-#!/usr/bin/env groovy
 pipeline {
-    agent none
+    agent {
+        docker {
+            image 'maven'
+        }
+    }
     stages {
-        stage('Build') {
-            agent {
-                docker { 
-                    image 'maven'
-                    args "-u root"    
-                    alwaysPull true
-                 }
-            }
+        stage('Test') {
             steps {
                 sh 'mvn test'
             }
