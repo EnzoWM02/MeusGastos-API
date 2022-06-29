@@ -4,6 +4,9 @@ pipeline {
             image 'maven:3.3.3'
         }
     }
+    triggers {
+        githubPush()
+    }
     stages {
         stage('Test') {
             steps {
